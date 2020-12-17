@@ -7,17 +7,26 @@ import torch
 
 from .common import fetch_pretrained_model, logger
 
-from simpletransformers.classification import ClassificationModel
+from simpletransformers.classification import ClassificationModel as OriginalClassificationModel
 
 manual_seed = 1234
 train_args={
     "regression": True,
     "manual_seed": manual_seed,
+    "silent": True,
 }
 
 def unzip_simple_transformer_model(model, model_folder, model_path):
     logger.info('Extracting file to folder')
     shutil.unpack_archive(model_path, model_folder)
+
+
+class ClassificationModel(OriginalClassificationModel):
+    def load_and_cache_examples(
+        self, examples, evaluate=False, no_cache=False, multi_label=False, verbose=False, silent=False
+    ):
+        return super().load_and_cache_examples(examples, evaluate, no_cache, multi_label, verbose, silent)
+
 
 class EmpathyClassifier():
     def __init__(self,
