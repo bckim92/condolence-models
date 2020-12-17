@@ -4,6 +4,6 @@ markdown
 beautifulsoup4
 numpy
 tqdm
-simpletransformers
+simpletransformers==0.49.7
 pandas
 numpy
