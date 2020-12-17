@@ -21,14 +21,15 @@ def unzip_simple_transformer_model(model, model_folder, model_path):
 
 class EmpathyClassifier():
     def __init__(self,
+                 datapath,
                  use_cuda=torch.cuda.is_available(),
                  cuda_device=0,
                  batch_size=16):
         self.model_type = "empathy"
         train_args["eval_batch_size"] = batch_size
 
-        model_path = os.path.join(os.path.dirname(__file__), "models/empathy/")
-        model_file = os.path.join(os.path.dirname(__file__), "models/empathy.tar.gz")
+        model_path = os.path.join(datapath, "models/empathy/")
+        model_file = os.path.join(datapath, "models/empathy.tar.gz")
         if not os.path.isdir(model_path):
             model = f'{self.model_type}_model'
             if not os.path.isfile(model_file):
